@@ -1,5 +1,5 @@
 resource "aws_eip" "k8s-eip" {
-    domain = "vpc"
+    vpc = true
 
     tags = {
       Name ="k8s-eip"
@@ -7,7 +7,7 @@ resource "aws_eip" "k8s-eip" {
 }
 
 resource "aws_nat_gateway" "k8s-nat-gateway" {
-    allocation_id = aws_eip.k8s-nat.id
+    allocation_id = aws_eip.k8s-eip.id
     subnet_id = aws_subnet.public_us_east_1_a.id
 
     tags = {
